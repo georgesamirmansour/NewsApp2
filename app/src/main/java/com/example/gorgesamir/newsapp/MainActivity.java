@@ -18,8 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<NewsApp>> {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsApp>> {
 
 
     NewsAdapter newsAdapter;
@@ -79,12 +80,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public Loader<ArrayList<NewsApp>> onCreateLoader(int id, Bundle args) {
+    public Loader<List<NewsApp>> onCreateLoader(int id, Bundle args) {
         return new NewsAppLoader(getApplicationContext());
     }
 
     @Override
-    public void onLoadFinished(Loader<ArrayList<NewsApp>> loader, ArrayList<NewsApp> data) {
+    public void onLoadFinished(Loader<List<NewsApp>> loader, List<NewsApp> data) {
         if (data.size() != 0) {
             newsAdapter.addAll(data);
             ProgressBar progressBar = findViewById(R.id.progressBar);
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onLoaderReset(Loader<ArrayList<NewsApp>> loader) {
+    public void onLoaderReset(Loader<List<NewsApp>> loader) {
         newsAdapter.clear();
     }
 }
