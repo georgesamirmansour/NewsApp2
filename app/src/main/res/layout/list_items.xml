@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Web Title"
+            android:text="@string/web_title"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Section Name"
+            android:text="@string/section_name"
             android:textColor="@android:color/holo_green_dark"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -46,8 +46,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Publish Date"
+            android:text="@string/publish_date"
             android:textColor="@android:color/holo_red_light" />
+
+        <TextView
+            android:id="@+id/authors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/authors"
+            android:textColor="@android:color/darker_gray" />
 
     </LinearLayout>
 

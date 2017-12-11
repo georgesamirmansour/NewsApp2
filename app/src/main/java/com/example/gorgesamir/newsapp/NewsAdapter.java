@@ -32,6 +32,8 @@ public class NewsAdapter extends ArrayAdapter<NewsApp> {
         webPublicationDateTextView.setText(currentNewApp.getWebPublicationDate());
         TextView webTitleTextView = listItemView.findViewById(R.id.webTitle);
         webTitleTextView.setText(currentNewApp.getWebTitle());
+        TextView authorsTextView = listItemView.findViewById(R.id.authors);
+        authorsTextView.setText(currentNewApp.getAuthors());
         ImageView thumbnailImageView = listItemView.findViewById(R.id.thumbnail);
         thumbnailImageView.setImageBitmap(currentNewApp.getThumbnail());
         return listItemView;

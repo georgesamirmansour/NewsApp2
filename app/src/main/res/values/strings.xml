@@ -3,4 +3,9 @@
     <string name="connection">connection:</string>
     <string name="no_internet">No INTERNET connection provided</string>
     <string name="no_data">No data provided !</string>
+    <string name="no_uri">No Uri found</string>
+    <string name="publish_date">Publish Date</string>
+    <string name="authors">authors</string>
+    <string name="section_name">Section Name</string>
+    <string name="web_title">Web Title</string>
 </resources>

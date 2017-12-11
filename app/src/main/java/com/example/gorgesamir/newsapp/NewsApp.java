@@ -9,16 +9,18 @@ import android.graphics.Bitmap;
 public class NewsApp {
     private String sectionName;
     private String webPublicationDate;
-    private String webTitle;
+    private String authors;
     private String webUrl;
+    private String webTitle;
     private Bitmap thumbnail;
 
-    public NewsApp(String sectionName, String webPublicationDate, String webTitle, String webUrl, Bitmap thumbnail) {
+    public NewsApp(String sectionName, String webPublicationDate, String webTitle, String webUrl, String authors, Bitmap thumbnail) {
         this.sectionName = sectionName;
         this.webPublicationDate = webPublicationDate;
         this.webTitle = webTitle;
         this.webUrl = webUrl;
         this.thumbnail = thumbnail;
+        this.authors = authors;
     }
 
     public String getSectionName() {
@@ -59,6 +61,14 @@ public class NewsApp {
 
     public void setThumbnail(Bitmap thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public String getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(String authors) {
+        this.authors = authors;
     }
 
 }

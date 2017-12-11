@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     NewsApp newsApp = newsAdapter.getItem(position);
                     Uri uri = Uri.parse(newsApp.getWebUrl());
                     if (newsApp.getWebUrl() == null || TextUtils.isEmpty(newsApp.getWebUrl())) {
-                        Toast.makeText(MainActivity.this, "No Uri found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, R.string.no_uri, Toast.LENGTH_SHORT).show();
                     } else {
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);

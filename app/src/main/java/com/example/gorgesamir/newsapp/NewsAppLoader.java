@@ -11,8 +11,8 @@ import java.util.List;
 public class NewsAppLoader extends android.support.v4.content.AsyncTaskLoader<List<NewsApp>> {
 
     public static String newsAppRequestUrl =
-            "https://content.guardianapis.com/search?q=free&format=json&order-by=newest" +
-                    "&order-date=published&show-fields=starRating,headline,thumbnail&api-key=test";
+            "https://content.guardianapis.com/search?q=free&format=json&order-by=newest&" +
+                    "order-date=published&show-tags=contributor&show-fields=starRating,headline,thumbnail&api-key=test";
 
     public NewsAppLoader(Context context) {
         super(context);

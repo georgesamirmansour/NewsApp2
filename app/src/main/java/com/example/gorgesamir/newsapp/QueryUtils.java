@@ -112,35 +112,36 @@ public final class QueryUtils {
         String webPublicationDate;
         String webTitle;
         String webUrl;
+        String authors = null;
         Bitmap thumbnail = null;
         try {
             JSONObject object = new JSONObject(jsonResult);
             JSONObject responseJsonObject = object.getJSONObject("response");
-            JSONArray responseArray = responseJsonObject.optJSONArray("results");
+            JSONArray resultsArray = responseJsonObject.optJSONArray("results");
             if (responseJsonObject.has("results")) {
-                for (int i = 0; i < responseArray.length(); i++) {
-                    JSONObject result = responseArray.getJSONObject(i);
-                    if (result.has("sectionName")) {
-                        sectionName = result.getString("sectionName");
+                for (int i = 0; i < resultsArray.length(); i++) {
+                    JSONObject resultObject = resultsArray.getJSONObject(i);
+                    if (resultObject.has("sectionName")) {
+                        sectionName = resultObject.getString("sectionName");
                     } else {
                         sectionName = "No Section Provided";
                     }
-                    if (result.has("webPublicationDate")) {
-                        webPublicationDate = result.getString("webPublicationDate");
+                    if (resultObject.has("webPublicationDate")) {
+                        webPublicationDate = resultObject.getString("webPublicationDate");
                     } else {
                         webPublicationDate = "No Date provided";
                     }
-                    if (result.has("webTitle")) {
-                        webTitle = result.getString("webTitle");
+                    if (resultObject.has("webTitle")) {
+                        webTitle = resultObject.getString("webTitle");
                     } else {
                         webTitle = "no title provided";
                     }
-                    if (result.has("webUrl")) {
-                        webUrl = result.getString("webUrl");
+                    if (resultObject.has("webUrl")) {
+                        webUrl = resultObject.getString("webUrl");
                     } else {
                         webUrl = null;
                     }
-                    JSONObject fields = result.getJSONObject("fields");
+                    JSONObject fields = resultObject.getJSONObject("fields");
                     if (fields.has("thumbnail")) {
                         try {
                             URL urlImage = new URL(fields.getString("thumbnail"));
@@ -151,8 +152,17 @@ public final class QueryUtils {
                     } else {
                         thumbnail = null;
                     }
+                    JSONArray tagsArray = resultObject.optJSONArray("tags");
+                    for (int j = 0; j < tagsArray.length(); j++) {
+                        JSONObject tagObject = tagsArray.getJSONObject(j);
+                        if (tagObject.has("webTitle")) {
+                            authors = tagObject.getString("webTitle");
+                        } else {
+                            authors = "No author provided";
+                        }
+                    }
                     newsAppArrayList.add(new
-                            NewsApp(sectionName, webPublicationDate, webTitle, webUrl, thumbnail));
+                            NewsApp(sectionName, webPublicationDate, webTitle, webUrl, authors, thumbnail));
                 }
             }
         } catch (JSONException e) {
