@@ -23,7 +23,6 @@ import java.util.ArrayList;
  * Created by gogos on 2017-12-05.
  */
 
-//
 
 public final class QueryUtils {
 
@@ -108,19 +107,19 @@ public final class QueryUtils {
         if (TextUtils.isEmpty(newsAppJson)) {
             return null;
         }
+        String jsonResult = fetchNewsAppData(newsAppJson);
         String sectionName;
         String webPublicationDate;
         String webTitle;
-        String webUrl = null;
+        String webUrl;
         Bitmap thumbnail = null;
         try {
-            String jsonResult = fetchNewsAppData(newsAppJson);
             JSONObject object = new JSONObject(jsonResult);
-            JSONArray responseArray = object.optJSONArray("response");
-            if (object.has("response")) {
+            JSONObject responseJsonObject = object.getJSONObject("response");
+            JSONArray responseArray = responseJsonObject.optJSONArray("results");
+            if (responseJsonObject.has("results")) {
                 for (int i = 0; i < responseArray.length(); i++) {
-                    JSONObject jsonObject = responseArray.getJSONObject(i);
-                    JSONObject result = jsonObject.getJSONObject("results");
+                    JSONObject result = responseArray.getJSONObject(i);
                     if (result.has("sectionName")) {
                         sectionName = result.getString("sectionName");
                     } else {
@@ -138,16 +137,19 @@ public final class QueryUtils {
                     }
                     if (result.has("webUrl")) {
                         webUrl = result.getString("webUrl");
+                    } else {
+                        webUrl = null;
                     }
-                    JSONObject fields = jsonObject.getJSONObject("fields");
+                    JSONObject fields = result.getJSONObject("fields");
                     if (fields.has("thumbnail")) {
                         try {
                             URL urlImage = new URL(fields.getString("thumbnail"));
                             thumbnail = BitmapFactory.decodeStream(urlImage.openConnection().getInputStream());
                         } catch (IOException e) {
                             Log.e(TAG, "extractNewsAppData: error parsing Image", e);
-                            ;
                         }
+                    } else {
+                        thumbnail = null;
                     }
                     newsAppArrayList.add(new
                             NewsApp(sectionName, webPublicationDate, webTitle, webUrl, thumbnail));
